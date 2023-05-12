@@ -1,0 +1,46 @@
+{% import 'vars.njk' as vars %}
+
+<header class="absolute inset-x-0 z-10">
+  <div class="container flex items-center justify-between">
+    <a href="" class="block">
+      <picture class="block h-11 w-28 md:h-11 md:w-36">
+        <img src={% static './images/logo.svg' %} class="block w-full h-full" alt="">
+      </picture>
+    </a>
+    <nav class="text-white">
+      <ul class="flex gap-10 border-b border-gray-50">
+        {% for item in vars.menu %}
+        <li
+          class="{% if loop.index == 1 %}active{% endif %} flex py-8 [&.active]:border-b [&.active]:border-white"
+        >
+          <a href="{{ item.url }}" class="block"> {{ item.title }} </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+    <div class="flex gap-2">
+      <div class="relative flex flex-col text-white" x-data="{ dropdown : false}" x-on:click.outside="dropdown = false">
+        <button
+          class="flex items-center gap-1 border border-gray-50 px-4 py-2"
+          x-on:click="dropdown = ! dropdown"
+        >
+          <span>En</span>
+          <svg width="6" height="10">
+            <use xlink:href="./assets/sprite.svg#arrow-d_sprite"></use>
+          </svg>
+        </button>
+        <div x-show="dropdown" class="absolute top-full w-full border border-gray-50 text-black">
+          <ul class="flex flex-col">
+            <li class="bg-white hover:bg-red hover:text-white">
+              <a href="" class="block px-3 py-2">En</a>
+            </li>
+            <li class="bg-white hover:bg-red hover:text-white">
+              <a href="" class="block px-3 py-2">De</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <a href="" class="btn btn--red"> Kontaktieren </a>
+    </div>
+  </div>
+</header>
